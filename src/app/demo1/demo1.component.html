@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Accessible Map</title>
+    <!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer -->
+    <script src="https://unpkg.com/elm-pep"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/css/ol.css" type="text/css">
+    <style>
+        .map {
+            width: 100%;
+            height: 100vh;
+        }
+
+        #map:focus {
+            outline: #4A74A8 solid 0.15em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <a class="skiplink" href="#map">Go to map</a> -->
+    <div id="map" class="map" tabindex="0"></div>
+    <div class="main_div">
+        <div class="panel_row">
+            <div class="panel_col_30">MapSource</div>
+            <div class="panel_col_70">
+                <select class="select" [(ngModel)]="mapSource" (ngModelChange)="onChange_mapSource(mapSource)">
+                    <option></option>
+                    <option>PaperMap</option>
+                    <option>OpenStreetMap</option>
+                    <option>BingMap_Dark</option>
+                    <option>BingMap_Light</option>
+                </select>
+            </div>
+        </div>
+        <div class="panel_row">
+            <div class="panel_col_30">GeoJSON</div>
+            <div class="panel_col_70">
+                <select class="select" [(ngModel)]="geoJson" (ngModelChange)="onChange_geoJson(geoJson)">
+                    <option></option>
+                    <option>Land</option>
+                    <option>Bundesland</option>
+                    <option>Regierungsbezirke</option>
+                </select>
+            </div>
+        </div>
+        <div class="panel_row" style="border-bottom: #4A74A8 2px dashed;">
+            <div class="panel_col_30">GPX</div>
+            <div class="panel_col_70" >
+                <select class="select" [(ngModel)]="gpx" (ngModelChange)="onChange_gpx(gpx)">
+                    <option></option>
+                    <option>Veloroute 09: Mitte-Ricklingen</option>
+                    <option>Veloroute 03: Mitte-Lahe</option>
+                    <option>Veloroute 12: Mitte-Stöcken</option>
+                </select>
+            </div>
+        </div>
+        <div class="panel_row" style="margin-top: 15px;">
+            <div class="panel_col_30">Wappen</div>
+            <div class="panel_col_70" style="width: 20%;">
+                <input type="checkbox" id="switch" [(ngModel)]="checkbox_showWappen" (change)="onChange_showWappen()"/>
+                <label class="label" for="switch"></label>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

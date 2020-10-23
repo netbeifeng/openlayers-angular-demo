@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rim-em-demo"
+    }
+  },
+  "defaultProject": "rim-em-demo",
+  "cli": {
+    "analytics": "cd740b58-b54c-4b8b-ac91-bc322891c601"
+  }
 }
