@@ -1,25 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { InitService } from '../init.service';
-// import 'ol/ol.css';
+
 import Map from 'ol/Map';
 import View from 'ol/View';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
-import Polyline from 'ol/format/Polyline';
+
 import BingMaps from 'ol/source/BingMaps';
-import {Icon, Style, Circle as CircleStyle} from 'ol/style';
+import { Style, Circle as CircleStyle} from 'ol/style';
 import {Fill, Stroke, Text} from 'ol/style';
 import OSM from 'ol/source/OSM';
 import * as olProj from 'ol/proj';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import {fromLonLat} from 'ol/proj';
 import GPX from 'ol/format/GPX';
 import VectorSource from 'ol/source/Vector';
 import TileJSON from 'ol/source/TileJSON';
 import GeoJSON from 'ol/format/GeoJSON';
-import ZoomSlider from 'ol/control/ZoomSlider';
-import {defaults as defaultControls} from 'ol/control';
-// import GeoJSON from 'ol/source/GeoJSON';
 
 @Component({
   selector: 'app-demo1',
@@ -380,7 +374,6 @@ export class Demo1Component implements OnInit {
 
     var map = new Map({
       target: 'map',
-      controls: defaultControls().extend([new ZoomSlider()]),
       layers: [],
       view: new View({
         center: olProj.fromLonLat([9.723971 ,52.353564]),
