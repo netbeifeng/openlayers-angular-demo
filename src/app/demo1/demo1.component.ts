@@ -34,8 +34,10 @@ export class Demo1Component implements OnInit {
     {id: -1, name: ""},
     {id: 0, name: "Land"},
     {id: 1, name: "Bundesland"},
-    {id: 2, name: "Regierungsbezirke"},
-    {id: 3, name: "Kreise"},
+    {id: 2, name: "RKI Corona Bundesland"},
+    {id: 3, name: "Regierungsbezirke"},
+    {id: 4, name: "Kreise"},
+    {id: 4, name: "RKI Corona Kreise"},
   ];
 
   gpx = [

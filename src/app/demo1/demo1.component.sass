@@ -23,6 +23,7 @@ body
     background-color: white
     box-shadow: 6px 26px 26px 10px $shadow
     border-radius: 5%
+
 .sub_div
     position: absolute
     font-family: $mainFont
@@ -41,6 +42,7 @@ body
         padding-bottom: 10px
     .line 
         font-size: 20px
+
     .line_1 i 
         color: #8A0720
     
@@ -66,6 +68,7 @@ body
 @media screen and ( max-width: 1460px ) 
     .sub_div
         height: 29%
+
     .main_div
         width: 32%
 
@@ -73,6 +76,7 @@ body
     .sub_div
         height: 32%
         width: 20%
+
     .main_div
         width: 35%
 
@@ -143,7 +147,6 @@ input[type=checkbox]
     border-radius: 30px
     position: relative
 
-
 .label:after 
     content: ''
     position: absolute
@@ -158,11 +161,9 @@ input[type=checkbox]
 input:checked + .label 
     background: $mainColor
 
-
 input:checked + .label:after 
     left: calc(100% - 1.5px)
     transform: translateX(-100%)
-
 
 .label:active:after 
     width: 39px
