@@ -5,6 +5,8 @@
             <meta charset="utf-8"/>
             <script src="https://unpkg.com/elm-pep"></script>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/css/ol.css" type="text/css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" type="text/css">
+            
         </head>
 
         <body>
@@ -34,8 +36,10 @@
                             <option></option>
                             <option>Land</option>
                             <option>Bundesland</option>
+                            <option>RKI Corona Bundesland</option>
                             <option>Regierungsbezirke</option>
                             <option>Kreise</option>
+                            <option>RKI Corona Kreise</option>
                         </select>
                     </div>
                 </div>
@@ -59,6 +63,24 @@
                         <label class="label" for="switch"></label>
                     </div>
                 </div>
+            </div>
+            <div class="sub_div" *ngIf="geoJson == 'RKI Corona Kreise'">
+                <div style="font-size: 23px;">Fälle letzte 7 Tage/100.000 EW</div>
+                <div class="line line_1"><i class="fas fa-circle 1"></i> > 100 – ≤ 500</div>
+                <div class="line line_2"><i class="fas fa-circle 2"></i> > 50 – ≤ 100</div>
+                <div class="line line_3"><i class="fas fa-circle 3"></i> > 25 – ≤ 50</div>
+                <div class="line line_4"><i class="fas fa-circle 4"></i> > 5 – ≤ 25</div>
+                <div class="line line_5"><i class="fas fa-circle 5"></i> > 0 – ≤ 5</div>
+                <div class="line line_6"><i class="fas fa-circle 6"></i> 0</div>
+            </div>
+            <div class="sub_div" *ngIf="geoJson == 'RKI Corona Bundesland'">
+                <div style="font-size: 23px;">Pro 100.000 Einwohner</div>
+                <div class="line line_1"><i class="fas fa-circle 1"></i> > 100 – ≤ 500</div>
+                <div class="line line_2"><i class="fas fa-circle 2"></i> > 50 – ≤ 100</div>
+                <div class="line line_3"><i class="fas fa-circle 3"></i> > 25 – ≤ 50</div>
+                <div class="line line_4"><i class="fas fa-circle 4"></i> > 5 – ≤ 25</div>
+                <div class="line line_5"><i class="fas fa-circle 5"></i> > 0 – ≤ 5</div>
+                <div class="line line_6"><i class="fas fa-circle 6"></i> 0</div>
             </div>
         </body>
     </html>

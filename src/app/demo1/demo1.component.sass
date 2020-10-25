@@ -17,12 +17,65 @@ body
     top: 5%
     right: 5%
     width: 30%
-    height: 20%
+    height: 25%
     padding: 10px 15px
     z-index: 9
     background-color: white
     box-shadow: 6px 26px 26px 10px $shadow
     border-radius: 5%
+.sub_div
+    position: absolute
+    font-family: $mainFont
+    left: 2%
+    bottom: 5%
+    width: 15%
+    height: 27%
+    padding: 15px 20px
+    z-index: 9
+    background-color: white
+    box-shadow: 6px 26px 26px 10px $shadow
+    border-radius: 5%
+
+    div
+        width: fit-content
+        padding-bottom: 10px
+    .line 
+        font-size: 20px
+    .line_1 i 
+        color: #8A0720
+    
+    .line_2 i 
+        color: #AC2038   
+
+    .line_3 i 
+        color: #CB9527
+
+    .line_4 i 
+        color: #D1CF88
+
+    .line_5 i 
+        color: #D2D0AD
+
+    .line_6 i 
+        color: #D3D3D3
+
+@media screen and ( max-width: 2400px ) 
+    .sub_div
+        height: 27%
+    
+@media screen and ( max-width: 1460px ) 
+    .sub_div
+        height: 29%
+    .main_div
+        width: 32%
+
+@media screen and ( max-width: 1010px ) 
+    .sub_div
+        height: 32%
+        width: 20%
+    .main_div
+        width: 35%
+
 .panel
     display: flex
     flex-direction: column

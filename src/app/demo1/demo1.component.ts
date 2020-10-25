@@ -64,6 +64,47 @@ export class Demo1Component implements OnInit {
 
   bundesland_array:any = new Array(); 
 
+  tileLayer_paperMap = new TileLayer({
+    source: new TileJSON({ 
+      url: 'https://a.tiles.mapbox.com/v3/aj.1x1-degrees.json?secure=1',
+      crossOrigin: '',
+    }),
+  });
+
+  tileLayer_osm = new TileLayer({
+    source: new OSM() // OpenStreetMap Source
+  });
+
+  tileLayer_bing_dark = new TileLayer({
+    visible: true,
+    preload: Infinity,
+    source: new BingMaps({
+      key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr', // app id
+      imagerySet: "CanvasDark", // style of Bing Map
+      maxZoom: 19
+    })
+  })
+
+  tileLayer_bing_light = new TileLayer({
+    visible: true,
+    preload: Infinity,
+    source: new BingMaps({
+      key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr',
+      imagerySet: "RoadOnDemand",
+      maxZoom: 19
+    })
+  })
+
+  tileLayer_bing_satellit = new TileLayer({
+    visible: true,
+    preload: Infinity,
+    source: new BingMaps({
+      key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr',
+      imagerySet: "AerialWithLabelsOnDemand",
+      maxZoom: 19
+    })
+  })
+
   /** constructor
    * Component Constructor 
    * @param init -> init Service to build *bundesland_array
@@ -180,87 +221,15 @@ export class Demo1Component implements OnInit {
   onChange_mapSource(e) { 
     this.select_mapSource = e;
     if(this.select_mapSource == "PaperMap") {
-      var tileLayer_paperMap = new TileLayer({
-        source: new TileJSON({ 
-          url: 'https://a.tiles.mapbox.com/v3/aj.1x1-degrees.json?secure=1',
-          crossOrigin: '',
-        }),
-      });
-      if(this.tileLayer == null) {
-        this.map.addLayer(tileLayer_paperMap);
-        this.tileLayer = tileLayer_paperMap;
-      } else {
-        this.map.removeLayer(this.tileLayer);
-        this.map.addLayer(tileLayer_paperMap);
-        this.tileLayer = tileLayer_paperMap;
-      }
-    }
-    else if(this.select_mapSource == "OpenStreetMap") {
-        var tileLayer_osm = new TileLayer({
-          source: new OSM() // OpenStreetMap Source
-        });
-        if(this.tileLayer == null) {
-          this.map.addLayer(tileLayer_osm);
-          this.tileLayer = tileLayer_osm;
-        } else {
-          this.map.removeLayer(this.tileLayer);
-          this.map.addLayer(tileLayer_osm);
-          this.tileLayer = tileLayer_osm;
-        }
+      this.setTileLayer(this.tileLayer_paperMap);
+    } else if(this.select_mapSource == "OpenStreetMap") {
+      this.setTileLayer(this.tileLayer_osm);
     } else if(this.select_mapSource == "BingMap_Dark") {
-      var tileLayer_bing = new TileLayer({
-        visible: true,
-        preload: Infinity,
-        source: new BingMaps({
-          key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr', // app id
-          imagerySet: "CanvasDark", // style of Bing Map
-          maxZoom: 19
-        })
-      })
-      if(this.tileLayer == null) {
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = tileLayer_bing;
-      } else {
-        this.map.removeLayer(this.tileLayer);
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = null;
-      }
+      this.setTileLayer(this.tileLayer_bing_dark);
     } else if(this.select_mapSource == "BingMap_Light") {
-      var tileLayer_bing = new TileLayer({
-        visible: true,
-        preload: Infinity,
-        source: new BingMaps({
-          key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr',
-          imagerySet: "RoadOnDemand",
-          maxZoom: 19
-        })
-      })
-      if(this.tileLayer == null) {
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = tileLayer_bing;
-      } else {
-        this.map.removeLayer(this.tileLayer);
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = tileLayer_bing;
-      }
+      this.setTileLayer(this.tileLayer_bing_light);
     } else if(this.select_mapSource == "BingMap_Satellit") {
-      var tileLayer_bing = new TileLayer({
-        visible: true,
-        preload: Infinity,
-        source: new BingMaps({
-          key: 'Ai6fp2ODdb5HRAEOI7nWAjEozFtB528VYoh0YMLhJpJpIry4fCpmxkmj7LL5RbRr',
-          imagerySet: "AerialWithLabelsOnDemand",
-          maxZoom: 19
-        })
-      })
-      if(this.tileLayer == null) {
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = tileLayer_bing;
-      } else {
-        this.map.removeLayer(this.tileLayer);
-        this.map.addLayer(tileLayer_bing);
-        this.tileLayer = tileLayer_bing;
-      }
+      this.setTileLayer(this.tileLayer_bing_satellit);
     } else {
       if(this.tileLayer != null) {
         this.map.removeLayer(this.tileLayer);
@@ -275,13 +244,18 @@ export class Demo1Component implements OnInit {
    * @source {
    *  Land: https://github.com/datasets/geo-countries
    *  Bundeslaender, Regierungsbezirke, Kreise: https://github.com/isellsoap/deutschlandGeoJSON
+   *  Corona: https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/ef4b445a53c1406892257fe63129a8ea_0
    * }
    * @author Chang
    * @date 24.10.2020
    */
   onChange_geoJson(e) { 
+    console.log(e);
+    
     this.select_geoJson = e;
     var style = this.style;
+    var _that = this;
+    style.getFill().setColor("rgba(255, 255, 255, 0.6)")
     if(this.select_geoJson == "Land") {
       var vectorLayer_land = new VectorLayer({
         source: new VectorSource({
@@ -293,14 +267,7 @@ export class Demo1Component implements OnInit {
           return style;
         },
       });
-      if(this.vectorLayer == null) {
-        this.map.addLayer(vectorLayer_land);
-        this.vectorLayer = vectorLayer_land;
-      } else {
-        this.map.removeLayer(this.vectorLayer);
-        this.map.addLayer(vectorLayer_land);
-        this.vectorLayer = vectorLayer_land;
-      }
+      this.setVectorLayer(vectorLayer_land);
     } else if(this.select_geoJson == "Bundesland") {
       var vectorLayer_bundesland = new VectorLayer({
         source: new VectorSource({
@@ -312,14 +279,36 @@ export class Demo1Component implements OnInit {
           return style;
         },
       });
-      if(this.vectorLayer == null) {
-        this.map.addLayer(vectorLayer_bundesland);
-        this.vectorLayer = vectorLayer_bundesland;
-      } else {
-        this.map.removeLayer(this.vectorLayer);
-        this.map.addLayer(vectorLayer_bundesland);
-        this.vectorLayer = vectorLayer_bundesland;
-      }
+      this.setVectorLayer(vectorLayer_bundesland);
+    } else if(this.select_geoJson == "RKI Corona Bundesland") {
+      var vectorLayer_corona_bundesland = new VectorLayer({
+        source: new VectorSource({
+          url: 'https://opendata.arcgis.com/datasets/ef4b445a53c1406892257fe63129a8ea_0.geojson',
+          format: new GeoJSON(),
+        }),
+        style: function (feature) {
+          style.getText().setText(feature.get('LAN_ew_GEN'));
+          let cases = feature.get('Fallzahl');
+          let faelle_100000_EW = feature.get('faelle_100000_EW');
+          _that.setFillColor_bundesland(style,faelle_100000_EW);
+          var _style = new Style({ 
+            text: new Text({
+              font: 'bold 20px Helvetica',
+              text: String(cases),
+              offsetY: 25,
+              fill: new Fill({
+                color: '#000',
+              }),
+              stroke: new Stroke({
+                color: '#fff',
+                width: 3,
+              }),
+            }),
+          });
+          return [style,_style];
+        },
+      });
+      this.setVectorLayer(vectorLayer_corona_bundesland);
     } else if(this.select_geoJson == "Regierungsbezirke") {
       var vectorLayer_regierungsbezirke = new VectorLayer({
         source: new VectorSource({
@@ -331,14 +320,7 @@ export class Demo1Component implements OnInit {
           return style;
         },
       });
-      if(this.vectorLayer == null) {
-        this.map.addLayer(vectorLayer_regierungsbezirke);
-        this.vectorLayer = vectorLayer_regierungsbezirke;
-      } else {
-        this.map.removeLayer(this.vectorLayer);
-        this.map.addLayer(vectorLayer_regierungsbezirke);
-        this.vectorLayer = vectorLayer_regierungsbezirke;
-      }
+      this.setVectorLayer(vectorLayer_regierungsbezirke);
     } else if (this.select_geoJson == "Kreise") {
       var vectorLayer_kreise = new VectorLayer({
         source: new VectorSource({
@@ -350,14 +332,36 @@ export class Demo1Component implements OnInit {
           return style;
         },
       });
-      if(this.vectorLayer == null) {
-        this.map.addLayer(vectorLayer_kreise);
-        this.vectorLayer = vectorLayer_kreise;
-      } else {
-        this.map.removeLayer(this.vectorLayer);
-        this.map.addLayer(vectorLayer_kreise);
-        this.vectorLayer = vectorLayer_kreise;
-      }
+      this.setVectorLayer(vectorLayer_kreise);
+    } else if (this.select_geoJson == "RKI Corona Kreise") {
+      var vectorLayer_corona_kreise = new VectorLayer({
+        source: new VectorSource({
+          url: 'https://opendata.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0.geojson',
+          format: new GeoJSON(),
+        }),
+        style: function (feature) {
+          style.getText().setText(feature.get('GEN'));
+          let cases = feature.get('cases');
+          let cases7_per_100k = feature.get('cases7_per_100k');
+          _that.setFillColor_kreis(style,cases7_per_100k);
+          var _style = new Style({ 
+            text: new Text({
+              font: 'bold 20px Helvetica',
+              text: String(cases),
+              offsetY: 25,
+              fill: new Fill({
+                color: '#000',
+              }),
+              stroke: new Stroke({
+                color: '#fff',
+                width: 3,
+              }),
+            }),
+          });
+          return [style,_style];
+        },
+      });
+      this.setVectorLayer(vectorLayer_corona_kreise);
     } else {
       if(this.vectorLayer != null) {
         this.map.removeLayer(this.vectorLayer);
@@ -499,6 +503,72 @@ export class Demo1Component implements OnInit {
           this.map.removeLayer(layer);
         }
       }
+    }
+  }
+
+  /** setTileLayer
+   * setMapSourceTileLayer
+   * @param layer -> new Layer
+   * @author Chang
+   * @date 25.10.2020
+   */
+  setTileLayer(layer) {
+    if(this.tileLayer == null) {
+      this.map.addLayer(layer);
+      this.tileLayer = layer;
+    } else {
+      this.map.removeLayer(this.tileLayer);
+      this.map.addLayer(layer);
+      this.tileLayer = layer;
+    }
+  }
+
+  /** setVectorLayer
+   * setGeoJSONVectorLayerLayer
+   * @param layer -> new Layer
+   * @author Chang
+   * @date 25.10.2020
+   */
+  setVectorLayer(layer) {
+    if(this.vectorLayer == null) {
+      this.map.addLayer(layer);
+      this.vectorLayer = layer;
+    } else {
+      this.map.removeLayer(this.vectorLayer);
+      this.map.addLayer(layer);
+      this.vectorLayer = layer;
+    }
+  }
+
+  setFillColor_bundesland(style,index) {
+    if(index < 178) {
+      style.getFill().setColor('#D3D3D3');
+    } else if(index < 272 && index >= 178) {
+      style.getFill().setColor('#D2D0AD');
+    } else if(index < 394 && index >= 272) {
+      style.getFill().setColor('#D1CF88');
+    } else if(index < 536 && index >= 394) {
+      style.getFill().setColor('#CB9527');
+    } else if(index < 637 && index >= 536) {
+      style.getFill().setColor('#AC2038');
+    } else if(index >= 637) {
+      style.getFill().setColor('#8A0720');
+    }
+  }
+
+  setFillColor_kreis(style,index) {
+    if(index == 0) {
+      style.getFill().setColor('#D3D3D3');
+    } else if(index <= 5 && index > 0) {
+      style.getFill().setColor('#D2D0AD');
+    } else if(index <= 25 && index > 5) {
+      style.getFill().setColor('#D1CF88');
+    } else if(index <= 50 && index > 25) {
+      style.getFill().setColor('#CB9527');
+    } else if(index <= 100 && index > 50) {
+      style.getFill().setColor('#AC2038');
+    } else if(index > 100) {
+      style.getFill().setColor('#8A0720');
     }
   }
 }
