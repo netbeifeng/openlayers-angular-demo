@@ -1,27 +1,29 @@
-# RimEmDemo
+# OpenLayers-Angular-Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+Dieses Demo hat OpenLayers und Angular zusammengesetzt.
 
-## Development server
+Und Hauptziel davon ist, um die APIs von OpenLayers kennenzulernen.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Bei Source kann man MapSource wählen.
+1. Paper Map
+2. [OSM](https://www.openstreetmap.de/karte.html)
+3. [Bing Map](https://www.bing.com/maps/)
 
-## Code scaffolding
+Bei GeoJSON kann man VektorLayer damit bekommen.
+Bei GPX kann man Route von GPX datei malen.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Datenquelle
+ - [bundesland.geo.json](https://github.com/isellsoap/deutschlandGeoJSON/blob/master/2_bundeslaender/1_sehr_hoch.geo.json)
+ - [regierungsbezirke.geojson](https://github.com/isellsoap/deutschlandGeoJSON/blob/master/3_regierungsbezirke/1_sehr_hoch.geo.json)
+ - [kreise.geojson](https://github.com/isellsoap/deutschlandGeoJSON/blob/master/4_kreise/1_sehr_hoch.geo.json)
+ - [countries.geo.json](https://github.com/datasets/geo-countries/blob/master/data/countries.geojson)
+ - [RKI_Corona_Bundeslaender.geojson](https://opendata.arcgis.com/datasets/ef4b445a53c1406892257fe63129a8ea_0.geojson)
+ - [RKI_Corona_Landkreise.geojson](https://opendata.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0.geojson)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Screenshots
+![](screenshots/MapSource1.png)
+![](screenshots/MapSource2.png)
+![](screenshots/MapSource3.png)
+![](screenshots/MapSource4.png)
+![](screenshots/MapSource5.png)
+![](screenshots/MapSource6.png)
